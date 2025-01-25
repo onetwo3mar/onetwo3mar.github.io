@@ -12,7 +12,7 @@ const config = {
       strict: false
     }),
     paths: {
-      base: dev ? '' : '/onetwo3mar.github.io'
+      base: dev ? '' : '/portfolio'
     },
     appDir: 'internal',
     trailingSlash: 'always'
