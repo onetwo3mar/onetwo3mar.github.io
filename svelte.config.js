@@ -11,7 +11,7 @@ const config = {
       fallback: null
     }),
     paths: {
-      base: dev ? '' : '/onetwo3mar.github.io'
+      base: dev ? '' : ''
     },
     appDir: 'internal'
   }
