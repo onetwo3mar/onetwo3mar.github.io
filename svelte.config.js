@@ -1,4 +1,3 @@
-// import adapter from '@sveltejs/adapter-auto';
 import adapter from '@sveltejs/adapter-static';
 const dev = process.env.NODE_ENV === 'development';
 
@@ -8,12 +7,15 @@ const config = {
     adapter: adapter({
       pages: 'docs',
       assets: 'docs',
-      fallback: null
+      fallback: null,
+      precompress: false,
+      strict: false
     }),
     paths: {
-      base: dev ? '' : ''
+      base: dev ? '' : '/onetwo3mar.github.io'
     },
-    appDir: 'internal'
+    appDir: 'internal',
+    trailingSlash: 'always'
   }
 };
 
