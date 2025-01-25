@@ -1,8 +1,20 @@
 <script>
   import { page } from '$app/stores';
-  import { fade } from 'svelte/transition';
   import { base } from '$app/paths';
-  import { selectedProject, transitionTime } from '../stores/state';
+  import { fade } from 'svelte/transition';
+  import { selectedProject } from '../stores/state';
+
+  // Helper function to safely check path
+  function isPath(path) {
+    try {
+      return $page?.url?.pathname?.includes(path) || false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  $: isProjectPage = isPath('project');
+  $: isAboutPage = isPath('about');
 </script>
 
 <header>
@@ -13,18 +25,15 @@
         <a sveltekit:prefetch href={base + '/'}>omar nema</a>
       </div>
     </div>
-    <div
-      class="header-nav"
-      class:split={$page.url.pathname.includes('project')}
-    >
-      {#if !$page.url.pathname.includes('project')}
+    <div class="header-nav" class:split={isProjectPage}>
+      {#if !isProjectPage}
         <a
           in:fade={{ duration: 300, delay: 200 }}
           out:fade={{ duration: 150 }}
           sveltekit:prefetch
           href={base + '/'}
           class="nav-item work"
-          class:selected={!$page.url.pathname.includes('about')}
+          class:selected={!isAboutPage}
         >
           <span>work</span>
         </a>
@@ -34,7 +43,7 @@
           sveltekit:prefetch
           href={base + '/about'}
           class="nav-item about"
-          class:selected={$page.url.pathname.includes('about')}
+          class:selected={isAboutPage}
         >
           about
         </a>
